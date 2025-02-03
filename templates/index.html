@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Blog Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #2377bd;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #f7b085;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #e68a4f;
+        }
+        .blogs-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .blogs-list li {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .blogs-list li h3 {
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            color: #2377bd;
+        }
+        .blogs-list li p {
+            font-size: 16px;
+            color: #333;
+        }
+        .actions a {
+            color: #f7b085;
+            margin-right: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .actions a:hover {
+            color: #e68a4f;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #2377bd;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AI Blog Generator</h1>
+    </header>
+
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="title" placeholder="Enter blog title" required>
+            <button type="submit">Generate Blog</button>
+        </form>
+
+        <h2>Generated Blogs</h2>
+        <ul class="blogs-list">
+            {% for blog in blogs %}
+                <li>
+                    <h3>{{ blog.title }}</h3>
+                    <p>{{ blog.content }}</p>
+                    <div class="actions">
+                        <a href="{% url 'blog_update' blog.id %}">Edit</a>
+                        <a href="{% url 'blog_delete' blog.id %}">Delete</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 AI Blog Generator | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
