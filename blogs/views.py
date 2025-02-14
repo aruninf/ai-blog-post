@@ -13,7 +13,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 from openai import OpenAI, completions
 
 client = OpenAI(
-  api_key="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"
+  api_key=os.getenv("OPENAI_API_KEY")
 )
 
 def get_api_response(prompt: str) -> str:
