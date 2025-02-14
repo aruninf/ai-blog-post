@@ -11,7 +11,7 @@ load_dotenv()
 OpenAI.api_key = os.getenv("OPENAI_API_KEY")
 
 client = OpenAI(
-  api_key="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"
+  api_key=os.getenv("OPENAI_API_KEY")
 )
 
 @shared_task
